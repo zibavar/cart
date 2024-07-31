@@ -16,6 +16,7 @@ import {CartContext} from '../context/cart'
     </Head>
        
         <div className='flex  min-h-screen flex-col justify-between'>
+            
            <header>
             <nav className='flex h-14 px-8 justify-between items-center border-b-4 bg-white'>
               <Link className='text-large font-bold ' href='/'>shopping</Link>

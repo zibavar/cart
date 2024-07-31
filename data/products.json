@@ -1,5 +1,6 @@
 [
     {
+        "id"  : "1",
         "title" : "book 1",
         "price" :"199",
         "slug" : "book-1",
@@ -9,6 +10,7 @@
         "image" :"/images/book1.jpg"
     },
     {
+        "id" : "2",
         "title" : "book 2",
         "price" :"299",
         "slug" : "book-2",

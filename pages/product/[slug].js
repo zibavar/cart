@@ -11,9 +11,9 @@ import {CartContext} from '../../context/cart'
 function productPage (){
 
    const {state,dispatch} = useContext(CartContext)
- 
+  
   const {query} = useRouter()
-
+  const router = useRouter()
   const {slug} = query
 
   const product = productItems.find((pItem)=> pItem.slug===slug)
@@ -30,9 +30,11 @@ function productPage (){
   return
  }
  dispatch ({ type:'ADD_ITEMS' , payload :{...product , qty}})
+ router.push('/cart')
  }
 
   return (
+  
     <Layout title= {product.title}>
         <div className='grid md:grid-cols-4 md:gap-3 bg-white rounded-xl p-10'>
            <div  className='md:cols-span-2'>
