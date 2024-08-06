@@ -2,7 +2,7 @@ import Layout from '../components/layout'
 import {useContext} from 'react'
 import {CartContext} from '../context/cart'
 import {useRouter} from 'next/router'
-
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 function CartPage(){
     const router = useRouter()
@@ -55,11 +55,11 @@ function CartPage(){
                     <div className='ml-5 '>{cartItems.reduce((acc,cur)=>acc+cur.count*cur.price,0)} </div>
                 </div> 
                 
-               <button onClick={()=> router.push('/shipping')} className="rounded-xl bg-gray-700 text-white px-4 m-auto">check out</button>
+               <button onClick={()=> router.push('login?redirect=/shipping')} className="rounded-xl bg-gray-700 text-white px-4 m-auto">check out</button>
                 </div>
             </div>
             )}
         </Layout>
     )
 }
-export default CartPage
+export default dynamic(()=> Promise.resolve(CartPage),{ssr:false})
