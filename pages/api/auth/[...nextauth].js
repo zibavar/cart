@@ -1,12 +1,12 @@
-import nextAuth  from "next-auth";
-import CredentialsProviders from "next-auth/providers/credentials";
-import db from '../../../utils'
+import nextAuth  from "next-auth/next";
+import CredentialsProvider from "next-auth/providers/credentials";
+import db from '../../../utils/db'
 import User from '../../../Models/user'
 import bcrypt from 'bcryptjs'
 
 export default nextAuth ({
     session :{
-        strategy: "jwt"
+        strategy: 'jwt'
     },
     callbacks:{
         async jwt ({token,user}){
@@ -21,9 +21,9 @@ export default nextAuth ({
         }
     },
     providers:[
-        CredentialsProviders({
+        CredentialsProvider({
             async authorize(credentials){
-                await db.coonect()
+                await db.connect()
                 const user =await User.findOne({
                     email:credentials.email,
                 })

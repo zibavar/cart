@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useContext ,useState,useEffect} from 'react'
 import {CartContext} from '../context/cart'
+ import { useSession } from 'next-auth/react'
 
  function Layout ({title,children}){
 
@@ -11,6 +12,7 @@ import {CartContext} from '../context/cart'
     useEffect(()=>{
         setCartItemsCount(cart.cartItems.reduce((acc,cur)=> acc + cur.qty ,0))
     },[cart.cartItems])
+    const{status , data:session} =useSession()
     return(
     <>
     <Head>
@@ -25,7 +27,14 @@ import {CartContext} from '../context/cart'
             <nav className='flex h-14 px-8 justify-between items-center border-b-4 bg-white'>
               <Link className='text-large font-bold ' href='/'>shopping</Link>
              <div>
-             <Link className='p-2' href='/login'>login</Link>
+                {status === 'loading' ?(
+                    'loading'
+                ) : session ?.user ?(
+                    session.user.name
+                ) :(
+                    <Link className='p-2' href='/login'>login</Link>
+                )}
+             
               <Link className='p-2' href='/cart'>
                 Cart
                 {cart.cartItems.length >0 &&(

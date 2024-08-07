@@ -1,6 +1,8 @@
 import Layout from '../components/layout'
+import { useRouter } from 'next/router' 
+import { useEffect } from 'react'
 import {useForm} from 'react-hook-form'
-import { signIn } from 'next-auth/react'
+import { signIn,useSession } from 'next-auth/react'
 import Link from 'next/link'
 function LoginPage(){
     const {
@@ -8,6 +10,16 @@ function LoginPage(){
         handleSubmit,
         formState: { errors },
     } = useForm()
+ const {data:session} = useSession()
+ const router =useRouter()
+ const {redirect} = router.query
+ useEffect(()=>{
+  if(session?.user){
+    router.push(redirect || '/')
+  }
+ },[router,session,redirect])
+
+
 
    async function submitHandler ({email,password}) {
    try {
