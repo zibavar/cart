@@ -1,7 +1,7 @@
 import nextAuth  from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import db from '../../../utils/db'
-import User from '../../../Models/user'
+import User from '../../../models/user'
 import bcrypt from 'bcryptjs'
 
 export default nextAuth ({
@@ -14,14 +14,16 @@ export default nextAuth ({
             if (user?.isAdmin) token.isAdmin = user.isAdmin 
             return token
         },
-        async session(session,token){
-            if(session?._id) session.user._id = token._id
-            if(session?.isAdmin) session.user.isAdmin = token.isAdmin
+        async session({session,token}){
+            if(token?._id) session.user._id = token._id
+            if(token?.isAdmin) session.user.isAdmin = token.isAdmin
             return session 
-        }
+        },
     },
     providers:[
+        
         CredentialsProvider({
+           
             async authorize(credentials){
                 await db.connect()
                 const user =await User.findOne({
@@ -32,6 +34,7 @@ export default nextAuth ({
                         _id : user._id,
                         name :user.name,
                         email :user.email,
+                        password :user.password,
                         image : 'f',
                         isAdmin :user.isAdmin
                     }

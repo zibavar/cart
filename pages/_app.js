@@ -4,7 +4,7 @@ import { SessionProvider } from 'next-auth/react'
 function MyApp({ Component, pageProps:{session,...pageProps} }) {
   return (
     <div className='bg-gray-100'>
-      <SessionProvider>
+      <SessionProvider session={session}>
     <CartContextProvider>
     <Component {...pageProps} />
     </CartContextProvider>

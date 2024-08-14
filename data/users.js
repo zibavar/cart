@@ -13,6 +13,13 @@ const users=[
         password : bcyrpt.hashSync('12345'),
         isAdmin : false
     
+    },
+    {
+        name : "sevda",
+        email : "sevda@gmail.com",
+        password : bcyrpt.hashSync('123456'),
+        isAdmin : false
+    
     }
 
 ]

@@ -5,35 +5,40 @@ import {useForm} from 'react-hook-form'
 import { signIn,useSession } from 'next-auth/react'
 import Link from 'next/link'
 function LoginPage(){
+
+  const {data:session} = useSession()
+
+    const router =useRouter()
+    const {redirect} = router.query
+
+    useEffect(()=>{
+     if(session?.user){
+       router.push(redirect || '/')
+     }
+    },[router,session,redirect]) 
+
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm()
- const {data:session} = useSession()
- const router =useRouter()
- const {redirect} = router.query
- useEffect(()=>{
-  if(session?.user){
-    router.push(redirect || '/')
-  }
- },[router,session,redirect])
+ 
+
+    
 
 
-
-   async function submitHandler ({email,password}) {
-   try {
-    const result = await signIn('credetionals',{
-        redirect :false,
-        email,
-        password
+     const submitHandler =async  ({email,password}) => {
+    
+    const result = await signIn('credentials',{
+      email,
+      password,
+      redirect: false,
     })
     if (result.error){
-        console.log('faild')
+       <p>feild</p>
     }
-   } catch(err){
-    console.log(err)
-   }
+   
 
     }
 return (
