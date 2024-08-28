@@ -1,4 +1,4 @@
-import productItems from '../../data/products.json'
+import productItems from '../../data/products'
 
 import { useRouter } from 'next/router' 
 

@@ -2,10 +2,10 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useContext ,useState,useEffect} from 'react'
 import {CartContext} from '../context/cart'
- import { useSession } from 'next-auth/react'
+ import { useSession,signOut } from 'next-auth/react'
  import { Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/react'
  import DropDown from './DropDown'
-
+import Cookies from 'js-cookie'
  function Layout ({title,children}){
 
     const {state,dispatch} = useContext(CartContext)
@@ -15,6 +15,11 @@ import {CartContext} from '../context/cart'
         setCartItemsCount(cart.cartItems.reduce((acc,cur)=> acc + cur.qty ,0))
     },[cart.cartItems])
     const{status , data:session} =useSession()
+
+    function logoutHandler(){
+     Cookies.remove()
+     signOut({callbackUrl:'/login'})
+    }
     return(
     <>
     <Head>
@@ -31,7 +36,7 @@ import {CartContext} from '../context/cart'
              <div className='flex'>
              
               
-               <div>
+              
                {status === 'loading' ?(
                     'loading'
                 ) : session ?.user ?(
@@ -58,9 +63,9 @@ import {CartContext} from '../context/cart'
                     </MenuItem>
 
                     <MenuItem as='div' className='hover:bg-violet-600 hover:rounded-xl'>
-                      <DropDown className='flex p-2' href='/logout'>
+                      <a className='flex p-2' href='#' onClick={logoutHandler}>
                       <img  src='./images/logout.png' className='w-8 pr-2.5'/>  Logout
-                      </DropDown>
+                      </a>
                     </MenuItem>
 
                    
@@ -68,15 +73,18 @@ import {CartContext} from '../context/cart'
                    
                     </Menu>
                 ) :(
-                    <Link className='p-2' href='/login'>login</Link>
+                    <div className='p-2 mt-2 font-bold text-gray-700'>
+                      <Link className='' href='/login'>login</Link>
+                    </div>
+                    
                 )}
              
-               </div>
+              
                <div className='border-l mr-2'></div> 
                <Link className='p-2 flex' href='/cart'>
               <img  src='/images/cart.png' className='w-8'/>
                 {cart.cartItems.length >0 &&(
-                    <span className='border-white w-6 h-6 relative top-2 right-3  ml-1 rounded-xl bg-violet-500 px-2 py-1 text-xs font-bold'>
+                    <span className='border-white w-6 h-6 relative top-2 right-3  ml-1 rounded-xl bg-violet-500 px-2 py-1 text-xs text-white font-bold'>
                         {cartItemsCount}
                     </span>
                 )}
