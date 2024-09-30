@@ -1,12 +1,12 @@
 import Layout from '../components/layout'
 import {useContext} from 'react'
-import {CartContext} from '../context/cart'
+import {Store} from '../context/cart'
 import {useRouter} from 'next/router'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 function CartPage(){
     const router = useRouter()
-    const {state,dispatch} = useContext(CartContext)
+    const {state,dispatch} = useContext(Store)
     const {cart :{cartItems},
      } = state
      function removeItemHandler(item){
@@ -37,7 +37,7 @@ function CartPage(){
                                 {item.title}
                             </span>
                         </td>
-                        <td className=' p-5'>{item.count}</td>
+                        <td className=' p-5'>{item.qty}</td>
                         <td className='p-5'>{item.price}</td>
                         <td className='p-5'>
                             <button onClick={()=> removeItemHandler(item)}     className='px-5 py-1 bg-red-500 text-white rounded'>remove</button>
@@ -52,7 +52,7 @@ function CartPage(){
               <div className="grid grid-cols-1 md:gap-5 border  ">
                 <div className="p-5 text-left font-bold flex ">
                    <span> total price:</span>  
-                    <div className='ml-5 '>{cartItems.reduce((acc,cur)=>acc+cur.count*cur.price,0)} </div>
+                    <div className='ml-5 '>{cartItems.reduce((acc,cur)=>acc+cur.qty*cur.price,0)} </div>
                 </div> 
                 
                <button onClick={()=> router.push('login?redirect=/shipping')} className="rounded-xl bg-gray-700 text-white px-4 m-auto">check out</button>

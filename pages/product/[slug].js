@@ -6,11 +6,11 @@ import Layout from '../../components/layout'
 
 import { useContext } from 'react'
 
-import {CartContext} from '../../context/cart'
+import {Store} from '../../context/cart'
 
 function productPage (){
 
-   const {state,dispatch} = useContext(CartContext)
+   const {state,dispatch} = useContext(Store)
   
   const {query} = useRouter()
   const router = useRouter()
@@ -29,7 +29,7 @@ function productPage (){
   alert('Product is out!')
   return
  }
- dispatch ({ type:'ADD_ITEMS' , payload :{...product , qty}})
+ dispatch ({ type:'ADD_TO_CART' , payload :{...product , qty}})
  router.push('/cart')
  }
 

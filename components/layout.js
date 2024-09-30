@@ -1,14 +1,18 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useContext ,useState,useEffect} from 'react'
-import {CartContext} from '../context/cart'
+import {Store} from '../context/cart'
  import { useSession,signOut } from 'next-auth/react'
  import { Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/react'
  import DropDown from './DropDown'
+ import { ToastContainer } from 'react-toastify'
+ import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'js-cookie'
+
+
  function Layout ({title,children}){
 
-    const {state,dispatch} = useContext(CartContext)
+    const {state,dispatch} = useContext(Store)
     const {cart} = state
     const [cartItemsCount,setCartItemsCount] = useState(0)
     useEffect(()=>{
@@ -27,7 +31,7 @@ import Cookies from 'js-cookie'
         {`shopping - ${title}`}
         </title>
     </Head>
-       
+       <ToastContainer position ={'bottom-center'} limit={1}   />
         <div className='flex  min-h-screen flex-col justify-between'>
             
            <header>
@@ -43,7 +47,7 @@ import Cookies from 'js-cookie'
                     <Menu as='div' className='relative inline-block mt-2 mr-4 '>
                   
                    <MenuButton as='div' className='text-blue-500'>
-                    <img src='./images/user.png' />
+                    <img src='../images/user.png' />
                     </MenuButton>    
 
                     <MenuItems as='div' className='absolute right-0 w-48 bg-violet-500 font-semibold text-white rounded-xl p-4 border-w border-slate-100'>
@@ -63,9 +67,9 @@ import Cookies from 'js-cookie'
                     </MenuItem>
 
                     <MenuItem as='div' className='hover:bg-violet-600 hover:rounded-xl'>
-                      <a className='flex p-2' href='#' onClick={logoutHandler}>
+                      <Link className='flex p-2' href='#' onClick={logoutHandler}>
                       <img  src='./images/logout.png' className='w-8 pr-2.5'/>  Logout
-                      </a>
+                      </Link>
                     </MenuItem>
 
                    
@@ -83,11 +87,11 @@ import Cookies from 'js-cookie'
                <div className='border-l mr-2'></div> 
                <Link className='p-2 flex' href='/cart'>
               <img  src='/images/cart.png' className='w-8'/>
-                {cart.cartItems.length >0 &&(
+                {/* {cart.cartItems.length >0 &&( */}
                     <span className='border-white w-6 h-6 relative top-2 right-3  ml-1 rounded-xl bg-violet-500 px-2 py-1 text-xs text-white font-bold'>
                         {cartItemsCount}
                     </span>
-                )}
+                {/* )} */}
               </Link>
              </div>
              
