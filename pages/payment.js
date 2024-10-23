@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 import CheckoutWizard from "../components/CheckoutWizard";
 import Layout from "../components/layout";
 import { useState,useContext } from "react";
-import {Store} from '../context/cart'
-import Cookies from "js-cookie";
+import {Store} from '../context/cart';
+import Cookies from 'js-cookie';
 
 function payment (){
    
@@ -17,15 +17,16 @@ function payment (){
         if(!selectPaymentMethod){
             alert('Please select your Payment method !!')
         }
-        dispatch({type:'SAVE_PAYMENT_METHOD', payload:selectPaymentMethod})
+       else{ dispatch({type:'SAVE_PAYMENT_METHOD', payload:selectPaymentMethod})
         Cookies.set(
             'cart',
             JSON.stringify({
                 ...cart,
-                peymentMethod: selectPaymentMethod
+                paymentMethod: selectPaymentMethod
             })
         )
         router.push('/placeorder')
+    }
     }
     return(
         <Layout title='payment page'>
