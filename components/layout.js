@@ -21,7 +21,9 @@ import Cookies from 'js-cookie'
     const{status , data:session} =useSession()
 
     function logoutHandler(){
-     Cookies.remove()
+  
+     Cookies.remove('cart')
+     
      signOut({callbackUrl:'/login'})
     }
     return(
@@ -61,10 +63,17 @@ import Cookies from 'js-cookie'
                     </MenuItem>
  
                     <MenuItem as='div' className='hover:bg-violet-600 hover:rounded-xl'>
-                    <DropDown className='flex p-2' href='/order'>
-                    <img  src='./images/order.png' className='w-8 pr-2.5'/> Order
+                    <DropDown className='flex p-2' href='/order-history'>
+                    <img  src='./images/order.png' className='w-8 pr-2.5'/> Order history
                     </DropDown>
                     </MenuItem>
+                    {session.user.isAdmin && (
+                      <MenuItem as='div' className='hover:bg-violet-600 hover:rounded-xl'>
+                      <DropDown className='flex p-2' href='/admin/dashboard'>
+                      <img  src='./images/dashboard.png' className='w-8 pr-2.5'/>Dashboard
+                      </DropDown>
+                      </MenuItem>
+                    )}
 
                     <MenuItem as='div' className='hover:bg-violet-600 hover:rounded-xl'>
                       <Link className='flex p-2' href='#' onClick={logoutHandler}>

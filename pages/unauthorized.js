@@ -7,3 +7,4 @@ function unauthorized (){
         </Layout>
     )
 }
+export default unauthorized

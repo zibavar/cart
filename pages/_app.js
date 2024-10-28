@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps:{session,...pageProps} }) {
       <SessionProvider session={session}>
     <StoreProvider>
       {Component.Auth ?(
-        <Auth>
+        <Auth adminOnly={Component.Auth.adminOnly}>
            <Component {...pageProps} />
         </Auth>
       ):(
@@ -20,10 +20,10 @@ function MyApp({ Component, pageProps:{session,...pageProps} }) {
   </div>
   )
 }
-function Auth (children){
+function Auth ({children,adminOnly}){
 const router = useRouter()
 
-const{status} = useSession({
+const{status , data:session} = useSession({
   required :true,
   onUnauthenticated (){
      router.push('/unauthorized')
@@ -33,7 +33,14 @@ const{status} = useSession({
 if (status==='loading'){
   return 'loading'
 }
-return children
+if(adminOnly && !session.user.isAdmin){
+  
+    router.push('/unauthorized')
+}
+ 
+
+  return children
+
 
 }
 export default MyApp

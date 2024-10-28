@@ -1,16 +1,20 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import CheckoutWizard from "../components/CheckoutWizard";
-import Layout from "../components/layout";
 import { useContext } from "react";
 import {Store} from '../context/cart'
 import Image from 'next/image'
+import { useState } from "react";
+import Layout from "../components/layout";
+
+
 function placeOrderPage(){
+    const [showModel,setShowModel]= useState(false)
     const router = useRouter()
     const {state} = useContext(Store)
     const {cart} = state
     const {shippingData,paymentMethod,cartItems} = cart
-
+    
     async function placeOrderHandler(){
        
         const totalPrice = cartItems.reduce((acc,cur)=>acc+cur.qty*cur.price,0)
@@ -28,7 +32,8 @@ function placeOrderPage(){
         const data = await response.json()
 console.log(data)
 
-    // router.push('/test')
+{setShowModel(true)}
+ 
     }
 return (
     <Layout title='PlaceOrder Page'>
@@ -109,13 +114,22 @@ return (
                         </div>
                     </li>
                     <li>
+
                         <button onClick={placeOrderHandler} className="rounded-xl bg-gray-700 text-white px-4 py-2">Place Order</button>
+
                     </li>
                 </ul>
             </div>
-          
+          {showModel ? (
+            <div className="mt-10 flex justify-center items-center flex-col absolute start-5 left-1/3 top-1/3	border-1 w-1/3 bg-gray-200 shadow-lg rounded-lg h-1/3 p-2 ">
+              <img src='../images/gift-box.png' width={100} height={100} objectfit="contain" />
+              <h2 className="text-base mt-2 mx-4 text-gray-800 font-semibold text-center">!! Your orders have been placed successfully !!</h2>
+              <button className="my-5 w-auto   px-8 h-10 bg-blue-600 text-white rounded-md hover:shadow-lg font-semibold" onClick={()=> router.push('/order-history')}>order history </button>
+              <button className=" w-auto absolute absolute top-0 right-0 px-8 h-10 bg-gray-600 text-white rounded-md hover:shadow-lg font-semibold" onClick={()=> setShowModel(false)}>close </button>
+          </div>) : null}
+
         </div>
-    </Layout>
+    </Layout> 
 )
 }
 export default placeOrderPage
