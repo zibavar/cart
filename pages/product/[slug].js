@@ -8,7 +8,7 @@ import { useContext,useState,useEffect } from 'react'
 import { toast } from 'react-toastify'
 import {Store} from '../../context/cart'
 
-function productPage (){
+function ProductPage (){
   const {state,dispatch} = useContext(Store)
     const {cart :{cartItems},
      } = state
@@ -117,4 +117,4 @@ const handleClick2 = () => {
    </>
   )
 }
-export default productPage
+export default ProductPage
