@@ -54,7 +54,7 @@ function Shipping() {
     <Layout title='Shipping'>
       <CheckoutWizard activeStep={1} />
       <form
-        className='mx-auto max-w-screen-md'
+        className='mx-auto  mt-50 max-w-screen-md'
         onSubmit={handleSubmit(submitHandler)}
       >
         <h2 className='mb-4 text-xl'>Shipping</h2>

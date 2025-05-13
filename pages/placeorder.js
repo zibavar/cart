@@ -121,7 +121,7 @@ return (
                 </ul>
             </div>
           {showModel ? (
-            <div className="mt-10 flex justify-center items-center flex-col absolute start-5 left-1/3 top-1/3	border-1 w-1/3 bg-gray-200 shadow-lg rounded-lg h-1/3 p-2 ">
+            <div className="mt-10 flex justify-center items-center flex-col absolute left-1/3  top-1/3	border-1 w-1/3 bg-gray-200 shadow-lg rounded-lg h-1/3 p-2 ">
               <img src='../images/gift-box.png' width={100} height={100} objectfit="contain" />
               <h2 className="text-base mt-2 mx-4 text-gray-800 font-semibold text-center">!! Your orders have been placed successfully !!</h2>
               <button className="my-5 w-auto   px-8 h-10 bg-blue-600 text-white rounded-md hover:shadow-lg font-semibold" onClick={()=> router.push('/order-history')}>order history </button>

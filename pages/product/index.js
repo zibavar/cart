@@ -39,7 +39,7 @@ const [productData,setProductData] = useState()
                                 <div className='pl-5'>{product.count >0 ? 'Avaibale' : 'Unavaibale'}</div>
                             
                                <div>price:</div>
-                               <div className='pl-5'>{product.price}</div>
+                               <div className='pl-5'>{product.price} $</div>
                              
                                </div>
                                <button onClick={priceHandler.bind(null,product.id)}> click for price</button>

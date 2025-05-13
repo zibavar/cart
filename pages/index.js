@@ -1,38 +1,32 @@
-import { useContext } from 'react'
+
 import Layout from '../components/layout'
-import ProductItem from '../components/ProductItem'
+import Slider from '../components/Slider'
+import ProductSlider from '../components/ProductSlider'
+import ProductsSlider from '../components/ProductsSlider'
 import db from '../utils/db'
 import Product from '../models/product'
-import { toast } from 'react-toastify'
-import {Store} from '../context/cart'
 
-
- function Home({products}) {
-
-  const {state , dispatch} = useContext(Store)
-  const {cart} = state
-  function addToCartHandler (product){
-    const existingItem = cart.cartItems.find(
-      (item) =>item.slug === product.slug
-    )
-    const qty = existingItem ? existingItem.qty +1 :1
-    dispatch({type:'ADD_TO_CART' , payload:{...product,qty}})
-    toast.success('Product is added ')
+export function generateMetadata(){
+  return {
+      title: "Home | Your Online Shop",
+      description: "Discover a wide range of amazing products.",
+      openGraph: {
+          title: "Home | Your Online Shop",
+          description: "Explore top-quality products at your fingertips.",
+      }
   }
+}
+ function Home({products}) {
+  
   return(
     <div>
      <Layout title='Home Page' > 
-    <div className='grid grid-cols-1 gap-12 md:grid-cols-3 lg:grid-cols-4'>
-      {products.map((pItem)=>(
-        <ProductItem 
-        AddToCart ={addToCartHandler}
-        item ={pItem} 
-        key={pItem.slug}>
 
-        </ProductItem>
-      ))}
-    </div>
      
+    <Slider />
+   <ProductsSlider products={products} />
+   <ProductSlider products={products} />
+
      </Layout> 
   
     </div>

@@ -19,11 +19,26 @@ function reducer  (state,action){
       return {...state,cart :{...state.cart,cartItems}}
 
     }
+ 
     case 'REMOVE_ITEMS' :{
       const cartItems = state.cart.cartItems.filter((item)=>item.slug !== action.payload.slug)
       Cookies.set('cart' , JSON.stringify({...state.cart,cartItems}))
       return {...state,cart :{...state.cart,cartItems}}
     }
+    case 'UPDATE_QUANTITY':{
+     const cartItems= state.cart.cartItems.map((item) =>
+        item.id === action.payload.id
+          ? { ...item, qty: action.payload.qty }
+          :  item
+        )
+        Cookies.set('cart' , JSON.stringify({...state.cart,cartItems}))
+      return {...state,cart :{...state.cart,cartItems}}
+    }
+ 
+   
+
+
+
     case 'SAVE_SHIPPING_DATA':
       return {
         ...state,
@@ -44,6 +59,9 @@ function reducer  (state,action){
             paymentMethod :action.payload
           }
         }
+        
+      
+
     default :
     return state
   }
@@ -52,7 +70,11 @@ function reducer  (state,action){
 
  export function StoreProvider ({children}){
     const [state , dispatch] = useReducer (reducer , initialState) 
-    const value = {state,dispatch}
+    const totalPrice = state.cart.cartItems.reduce(
+      (acc, item) => acc + item.price * item.qty,
+      0
+    );
+    const value = {state,dispatch,totalPrice}
     return <Store.Provider value={value}>{children}</Store.Provider>
 }
 
