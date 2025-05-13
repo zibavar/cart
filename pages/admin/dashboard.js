@@ -2,7 +2,7 @@ import Layout from "../../components/layout"
 import Link from "next/link"
 import { useEffect,useState } from "react"
 
-function dashboardPage(){
+function DashboardPage(){
     const[adminData,setAdminData]=useState([])
     useEffect(()=>{
         async function fetchData(){
@@ -67,5 +67,5 @@ function dashboardPage(){
         </div>
     </Layout>
 }   
-dashboardPage.Auth ={adminOnly:true}
-export default dashboardPage
+DashboardPage.Auth ={adminOnly:true}
+export default DashboardPage

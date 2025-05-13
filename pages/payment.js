@@ -5,7 +5,7 @@ import { useState,useContext } from "react";
 import {Store} from '../context/cart';
 import Cookies from 'js-cookie';
 
-function payment (){
+function Payment (){
    
     const {state,dispatch} =useContext(Store)
     const {cart} = state
@@ -60,4 +60,4 @@ function payment (){
         </Layout>
     )
 }
-export default payment
+export default Payment

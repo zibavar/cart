@@ -2,7 +2,7 @@ import { useEffect,useState } from 'react'
 import Layout from '../../components/layout'
 import Link from 'next/link'
 
-function ordersFetchPage(){
+function OrdersFetchPage(){
     const[adminOrders,setAdminOrders] = useState([])
 useEffect(()=>{
     async function fetchData(){
@@ -56,4 +56,4 @@ return <Layout title='Orders Admin Page'>
 
     </div>
 </Layout>
-}export default ordersFetchPage
+}export default OrdersFetchPage

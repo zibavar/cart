@@ -8,7 +8,7 @@ import { useState } from "react";
 import Layout from "../components/layout";
 
 
-function placeOrderPage(){
+function PlaceOrderPage(){
     const [showModel,setShowModel]= useState(false)
     const router = useRouter()
     const {state} = useContext(Store)
@@ -132,4 +132,4 @@ return (
     </Layout> 
 )
 }
-export default placeOrderPage
+export default PlaceOrderPage

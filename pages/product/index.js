@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import fs from 'fs'
 import path from 'path'
-function page(props) {
+function Page(props) {
 const [productData,setProductData] = useState()
    async function priceHandler (id){
         const response =await fetch(`/api/${id}`)
@@ -66,5 +66,5 @@ return {
     }
 }
 }
-export default page 
+export default Page 
 
