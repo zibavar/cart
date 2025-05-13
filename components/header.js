@@ -6,6 +6,7 @@ import {Store} from '../context/cart'
  import DropDown from './DropDown'
  
 import Cookies from 'js-cookie'
+import Image from 'next/image'
 
 function Header (){
   const {state,dispatch} = useContext(Store)
@@ -87,7 +88,7 @@ function Header (){
   
    <div className='border-l mr-2'></div> 
    <Link className='p-2 flex' href='/cart'>
-  <img  src='/images/cart.png' className='w-8'/>
+  <Image  src='/images/cart.png' className='w-8'/>
     {/* {cart.cartItems.length >0 &&( */}
         <span className='border-white w-6 h-6 relative top-2 right-3  ml-1 rounded-xl bg-violet-500 px-2 py-1 text-xs text-white font-bold'>
             {cartItemsCount}
