@@ -37,8 +37,8 @@ function Payment (){
          <h2 className='mb-4 text-xl'>Payment 
             method
          </h2>
-          {methods.map((item)=>(
-              <div keys={item} className="mb-4 ">
+          {methods.map((item,index)=>(
+              <div  keys={index} className="mb-4 ">
                 <input 
                 name="PaymentMethod"
                 type="radio"

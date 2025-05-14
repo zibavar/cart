@@ -16,14 +16,15 @@ function ProductPage (){
   const {query} = useRouter()
   const router = useRouter()
   const {slug} = query
-     const product = productItems.find((pItem)=> pItem.slug===slug)
-  if(!product){
-    return <div>Product NOt find!</div>
-  }
+     
   const [counter, setCounter] = useState(1);
   useEffect(() => {
     // Check if the product exists in the cart and set the quantity accordingly
     let cartProduct =cartItems.find(item => item.id===product.id) 
+    const product = productItems.find((pItem)=> pItem.slug===slug)
+  if(!product){
+    return <div>Product NOt find!</div>
+  }
     if (cartProduct){
       setCounter(cartProduct.qty)
     }

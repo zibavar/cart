@@ -81,7 +81,7 @@ return (
             </button>
             </div>
             <div className='mb-4 flex '>
-                <p className='px-1 py-1' >If you haven't registered yet! </p>
+                <p className='px-1 py-1' >If you haven&apos;t registered yet! </p>
             <Link href='register' className='ml-3 rounded-xl bg-red-700 text-white px-4 py-1 w-24 h-8'>
               Register 
             </Link>
